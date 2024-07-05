@@ -6,7 +6,7 @@ const movieRouter = require("./Routes/movieRoutes");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.CLIENT_PORT || 2000;
 
 // Connect to MongoDB
 connectDB();
