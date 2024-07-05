@@ -1,4 +1,5 @@
 const Watchlist = require("../Model/movie");
+const MovieModel = require("../Model/movie");
 
 exports.getAllMovies = async (req, res) => {
   try {
