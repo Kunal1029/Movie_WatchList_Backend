@@ -48,6 +48,7 @@ exports.insertMovie = async (req, res) => {
 
     const movie = await InsertMovie.save();
     res.status(201).json(movie);
+    // console.log(movie)
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -79,3 +80,43 @@ exports.deleteMovie = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.IsWatch = async (req, res) => {
+  try {
+    // const { id } = req.params;
+    const { watchStatus } = req.body;
+    const movie = await MovieModel.findByIdAndUpdate(
+      req.params.id,
+      { watchStatus },
+      { new: true, runValidators: true }
+    );
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+    res.json(movie);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.commentUpdate = async (req, res) => {
+  try {
+    const { rating, reviews } = req.body;
+    const movie = await MovieModel.findByIdAndUpdate(
+      req.params.id,
+      { rating, reviews },
+      { new: true, runValidators: true }
+    );
+
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    res.json(movie);
+    // console.log(req.params.id, rating, reviews)
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
